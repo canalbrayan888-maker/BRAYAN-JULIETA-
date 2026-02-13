@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brayan & Julieta 💖</title>
+
+<style>
+body{
+    margin:0;
+    overflow-x:hidden;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to top, #000814, #001d3d);
+    color:white;
+    text-align:center;
+}
+
+/* ESTRELLAS */
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    animation: twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+    from{opacity:0.2;}
+    to{opacity:1;}
+}
+
+/* LUNA */
+.moon{
+    position:absolute;
+    top:80px;
+    right:80px;
+    width:120px;
+    height:120px;
+    background: radial-gradient(circle,#fff,#ddd);
+    border-radius:50%;
+    box-shadow:0 0 40px #fff;
+}
+
+/* CORAZÓN INICIAL */
+#introHeart{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%) scale(0);
+    font-size:120px;
+    animation: heartAnimation 2.5s ease-out forwards;
+    z-index:10;
+}
+@keyframes heartAnimation{
+    0%{transform:translate(-50%, -50%) scale(0);}
+    40%{transform:translate(-50%, -50%) scale(1.4);}
+    70%{transform:translate(-50%, -50%) scale(1);}
+    100%{transform:translate(-50%, -50%) scale(12); opacity:0;}
+}
+
+/* CORAZONES FLOTANDO */
+.floating{
+    position:fixed;
+    bottom:-20px;
+    font-size:20px;
+    animation: floatUp 8s linear infinite;
+}
+@keyframes floatUp{
+    from{transform:translateY(0);}
+    to{transform:translateY(-110vh);}
+}
+
+.container{
+    padding:40px 20px;
+}
+
+h1{
+    font-size:38px;
+    margin-top:50px;
+}
+
+#counter{
+    font-size:20px;
+    margin-top:20px;
+    line-height:1.8;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#ff4d6d;
+    color:white;
+    margin:8px;
+}
+
+.secret{
+    display:none;
+    margin-top:20px;
+    font-size:18px;
+    color:#ffc8dd;
+}
+</style>
+</head>
+
+<body>
+
+<div id="introHeart">❤️</div>
+<div class="moon"></div>
+
+<div class="container">
+<h1>Brayan & Julieta ✨</h1>
+
+<h2>Tiempo de relación 💕</h2>
+<div id="counter"></div>
+
+<h2>Nuestra Historia 💌</h2>
+<p id="typewriter"></p>
+
+<h2>Nuestra Música 🎶</h2>
+<button onclick="window.open('https://www.youtube.com/results?search_query=labios+rotos+zoe')">Labios Rotos - Zoé</button>
+<button onclick="window.open('https://www.youtube.com/results?search_query=luna+zoe')">Luna - Zoé</button>
+<button onclick="window.open('https://www.youtube.com/results?search_query=cuco+lo+que+siento')">Cuco</button>
+
+<br><br>
+<button onclick="showSecret()">Mensaje secreto 💌</button>
+<div class="secret" id="secretMessage">
+Julieta, si alguna vez dudas de cuánto te amo, mira este contador…
+porque cada segundo que pasa confirma que elegirte fue la mejor decisión de mi vida. 🌙❤️
+</div>
+
+</div>
+
+<script>
+// ESTRELLAS
+for(let i=0;i<200;i++){
+    let star=document.createElement("div");
+    star.className="star";
+    star.style.top=Math.random()*100+"vh";
+    star.style.left=Math.random()*100+"vw";
+    star.style.animationDuration=(Math.random()*2+1)+"s";
+    document.body.appendChild(star);
+}
+
+// CORAZONES FLOTANDO
+setInterval(()=>{
+    let heart=document.createElement("div");
+    heart.className="floating";
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+10)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),8000);
+},800);
+
+// CONTADOR
+const startDate = new Date("2025-02-23T15:30:00");
+
+function updateCounter(){
+    const now = new Date();
+    const diff = now - startDate;
+
+    const seconds = Math.floor(diff/1000);
+    const minutes = Math.floor(diff/60000);
+    const hours = Math.floor(diff/3600000);
+    const days = Math.floor(diff/86400000);
+    const weeks = Math.floor(days/7);
+    const months = Math.floor(days/30.44);
+    const years = Math.floor(days/365.25);
+
+    document.getElementById("counter").innerHTML =
+    years+" años<br>"+
+    months+" meses<br>"+
+    weeks+" semanas<br>"+
+    days+" días<br>"+
+    hours+" horas<br>"+
+    minutes+" minutos<br>"+
+    seconds+" segundos";
+}
+
+setInterval(updateCounter,1000);
+updateCounter();
+
+// MAQUINA DE ESCRIBIR
+const text="Desde el 23 de febrero del 2025 a las 3:30 PM, cuando te pedí que fueras mi novia, el universo cambió para mí. Desde entonces, cada estrella parece brillar más fuerte cuando estoy contigo.";
+let i=0;
+function typeWriter(){
+    if(i<text.length){
+        document.getElementById("typewriter").innerHTML+=text.charAt(i);
+        i++;
+        setTimeout(typeWriter,40);
+    }
+}
+typeWriter();
+
+// MENSAJE SECRETO
+function showSecret(){
+    document.getElementById("secretMessage").style.display="block";
+}
+</script>
+
+</body>
+  </html>
