@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brayan & Julieta 💖</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    background: radial-gradient(circle at center, #0b1d3a, #000814);
+    color:white;
+    font-family: 'Segoe UI', sans-serif;
+    text-align:center;
+    overflow-x:hidden;
+}
+
+/* 🌙 Luna */
+.moon{
+    width:120px;
+    height:120px;
+    background:#fff;
+    border-radius:50%;
+    margin:40px auto;
+    box-shadow:0 0 40px rgba(255,255,255,0.8);
+}
+
+/* 💖 Corazones flotando */
+.heart{
+    position:fixed;
+    font-size:20px;
+    animation: float 12s linear infinite;
+    opacity:0.8;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh);}
+    100%{transform:translateY(-10vh);}
+}
+
+h1{
+    font-size:40px;
+    margin-top:20px;
+}
+
+h2{
+    margin-top:40px;
+    font-size:28px;
+}
+
+#contador{
+    font-size:22px;
+    line-height:35px;
+    margin-top:20px;
+}
+
+.historia{
+    max-width:90%;
+    margin:20px auto;
+    font-size:18px;
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:#ff4d88;
+    color:white;
+    font-size:16px;
+    margin:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    box-shadow:0 0 15px #ff4d88;
+    transform:scale(1.1);
+}
+</style>
+</head>
+
+<body>
+
+<h1>Brayan 💖 Julieta</h1>
+
+<div class="moon"></div>
+
+<h2>Tiempo de relación</h2>
+<div id="contador"></div>
+
+<h2>Nuestra Historia 💌</h2>
+<div class="historia">
+Desde el 23 de febrero del 2025 a las 3:30 PM, cuando te pedí que fueras mi novia,
+el universo cambió para mí. Desde entonces, cada estrella brilla más fuerte
+cuando estoy contigo. ✨
+</div>
+
+<h2>Nuestra Música 🎵</h2>
+<button onclick="document.getElementById('audio').play()">Labios Rotos - Zoé</button>
+<button onclick="document.getElementById('audio').play()">Luna - Zoé</button>
+
+<audio id="audio" autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// 💖 Generar corazones
+function crearCorazon(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(15+Math.random()*20)+"px";
+    heart.style.animationDuration=(10+Math.random()*10)+"s";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{heart.remove();},12000);
+}
+setInterval(crearCorazon,1500);
+
+// ⏳ Contador tipo reloj real
+const fechaInicio = new Date("February 23, 2025 15:30:00").getTime();
+
+function actualizarContador(){
+    const ahora = new Date().getTime();
+    const diferencia = ahora - fechaInicio;
+
+    const segundosTotales = Math.floor(diferencia / 1000);
+
+    const años = Math.floor(segundosTotales / (60*60*24*365));
+    const meses = Math.floor((segundosTotales % (60*60*24*365)) / (60*60*24*30));
+    const dias = Math.floor((segundosTotales % (60*60*24*30)) / (60*60*24));
+    const horas = Math.floor((segundosTotales % (60*60*24)) / (60*60));
+    const minutos = Math.floor((segundosTotales % (60*60)) / 60);
+    const segundos = segundosTotales % 60;
+
+    document.getElementById("contador").innerHTML = `
+        ${años} años <br>
+        ${meses} meses <br>
+        ${dias} días <br>
+        ${horas} horas <br>
+        ${minutos} minutos <br>
+        ${segundos} segundos
+    `;
+}
+
+setInterval(actualizarContador,1000);
+actualizarContador();
+</script>
+
+</body>
+</html>
